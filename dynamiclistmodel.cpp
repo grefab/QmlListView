@@ -31,7 +31,7 @@ int DynamicListModelQt::rowCount(const QModelIndex& parent) const
 QVariant DynamicListModelQt::data(const QModelIndex& index, int role) const
 {
     if( index.row() >= 0 && index.row() < count() ) {
-        return itemAt(index.row(), QString::fromUtf8(roleNames()[role]));
+        return itemAsVariant(index.row(), QString::fromUtf8(roleNames()[role]));
     }
 
     return QVariant();
