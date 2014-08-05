@@ -5,6 +5,16 @@
 DynamicListModel::DynamicListModel(QObject* parent) :
     QAbstractListModel(parent)
 {
+    stuff_.append(DynamicListItem("foo"));
+    stuff_.append(DynamicListItem("bar"));
+    stuff_.append(DynamicListItem("baz"));
+}
+
+QHash<int, QByteArray> DynamicListModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[NameRole] = "name";
+    return roles;
 }
 
 void DynamicListModel::enqueueStuff(QString stuff)
@@ -31,7 +41,12 @@ QVariant DynamicListModel::data(const QModelIndex& index, int role) const
     qDebug() << role;
 
     if( index.row() >= 0 && index.row() < stuff_.size() ) {
-        return QVariant(stuff_[index.row()]);
+        switch( role ) {
+            case NameRole:
+                return stuff_[index.row()].name();
+            default:
+                return QVariant();
+        }
     }
 
     return QVariant();

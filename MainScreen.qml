@@ -11,45 +11,16 @@ Rectangle {
         y: 120
         width: 110
         height: 160
-        model: ListModel {
-            ListElement {
-                name: "Grey"
-                colorCode: "grey"
-            }
-
-            ListElement {
-                name: "Red"
-                colorCode: "red"
-            }
-
-            ListElement {
-                name: "Blue"
-                colorCode: "blue"
-            }
-
-            ListElement {
-                name: "Green"
-                colorCode: "green"
-            }
-        }
+        clip: true
+        model: dynamicListModel
         delegate: Item {
             x: 5
             width: 80
             height: 40
-            Row {
-                id: row1
-                spacing: 10
-                Rectangle {
-                    width: 40
-                    height: 40
-                    color: colorCode
-                }
-
-                Text {
-                    text: name
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.bold: true
-                }
+            Text {
+                text: name
+                anchors.verticalCenter: parent.verticalCenter
+                font.bold: true
             }
         }
     }
