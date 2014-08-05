@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    DynamicListModel dynamicListModel;
-    engine.rootContext()->setContextProperty("dynamicListModel", &dynamicListModel);
+    MyListModel myListModel;
+    engine.rootContext()->setContextProperty("dynamicListModel", &myListModel);
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 

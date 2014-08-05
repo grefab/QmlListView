@@ -2,80 +2,60 @@
 
 #include <QDebug>
 
-DynamicListModel::DynamicListModel(QObject* parent) :
+DynamicListModelQt::DynamicListModelQt(QObject* parent) :
     QAbstractListModel(parent)
 {
-    stuff_.append(DynamicListItem("foo"));
-    stuff_.append(DynamicListItem("bar"));
-    stuff_.append(DynamicListItem("baz"));
 }
 
-void DynamicListModel::pushFront(QString stuff)
+void DynamicListModelQt::push(std::function<void(void)> pushAction, int idx)
 {
-    beginInsertRows(QModelIndex(), 0, 0);
-    stuff_.prepend(stuff);
+    beginInsertRows(QModelIndex(), idx, idx);
+    pushAction();
     endInsertRows();
 }
 
-void DynamicListModel::pushBack(QString stuff)
+void DynamicListModelQt::pop(std::function<void(void)> popAction, int idx)
 {
-    beginInsertRows(QModelIndex(), stuff_.size(), stuff_.size());
-    stuff_.append(stuff);
-    endInsertRows();
+    beginRemoveRows(QModelIndex(), idx, idx);
+    popAction();
+    endRemoveRows();
 }
 
-void DynamicListModel::popFront()
+int DynamicListModelQt::rowCount(const QModelIndex& parent) const
 {
-    if( !stuff_.isEmpty() ) {
-        beginRemoveRows(QModelIndex(), 0, 0);
-        stuff_.removeFirst();
-        endRemoveRows();
+    Q_UNUSED(parent)
+
+    return count();
+}
+
+QVariant DynamicListModelQt::data(const QModelIndex& index, int role) const
+{
+    if( index.row() >= 0 && index.row() < count() ) {
+        return itemAt(index.row(), QString::fromUtf8(roleNames()[role]));
     }
+
+    return QVariant();
 }
 
-void DynamicListModel::popBack()
+MyListModel::MyListModel(QObject* parent) :
+     DynamicListModel<QString>(parent)
 {
-    if( !stuff_.isEmpty() ) {
-        beginRemoveRows(QModelIndex(), stuff_.size() -1, stuff_.size() -1);
-        stuff_.removeLast();
-        endRemoveRows();
-    }
+    addRoleAccessor("name", [](const QString& item)
+    {
+        return item;
+    });
+
+    pushBack("foo");
+    pushBack("bar");
+    pushBack("baz");
 }
 
-void DynamicListModel::addStuff(QString stuff)
+void MyListModel::addStuff(QString stuff)
 {
     pushFront(stuff);
 }
 
-void DynamicListModel::killLast()
+void MyListModel::killLast()
 {
     popBack();
-}
-
-QHash<int, QByteArray> DynamicListModel::roleNames() const
-{
-    QHash<int, QByteArray> roles;
-    roles[NameRole] = "name";
-    return roles;
-}
-
-int DynamicListModel::rowCount(const QModelIndex& parent) const
-{
-    Q_UNUSED(parent)
-
-    return stuff_.count();
-}
-
-QVariant DynamicListModel::data(const QModelIndex& index, int role) const
-{
-    if( index.row() >= 0 && index.row() < stuff_.size() ) {
-        switch( role ) {
-            case NameRole:
-                return stuff_[index.row()].name();
-            default:
-                return QVariant();
-        }
-    }
-
-    return QVariant();
 }
