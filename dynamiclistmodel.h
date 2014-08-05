@@ -9,7 +9,7 @@ class DynamicListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    DynamicListModel(QObject parent = 0);
+    DynamicListModel(QObject* parent = 0);
 
     void enqueueStuff(QString stuff);
     void dequeueStuff();

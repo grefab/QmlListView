@@ -1,6 +1,6 @@
 #include "dynamiclistmodel.h"
 
-DynamicListModel::DynamicListModel(QObject parent) :
+DynamicListModel::DynamicListModel(QObject* parent) :
     QAbstractListModel(parent)
 {
 }
