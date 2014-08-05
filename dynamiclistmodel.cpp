@@ -47,6 +47,11 @@ void DynamicListModel::addStuff(QString stuff)
     pushFront(stuff);
 }
 
+void DynamicListModel::killLast()
+{
+    popBack();
+}
+
 QHash<int, QByteArray> DynamicListModel::roleNames() const
 {
     QHash<int, QByteArray> roles;

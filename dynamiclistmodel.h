@@ -28,6 +28,7 @@ public:
 public slots:
     /* Our interface. */
     void addStuff(QString stuff);
+    void killLast();
 
 public:
     /* QAbstractListModel interface. */

@@ -19,6 +19,13 @@ Rectangle {
 
         add: Transition { NumberAnimation { properties: "x"; from: -80; duration: 1000 } }
         addDisplaced: Transition { NumberAnimation { properties: "x"; duration: 1000 } }
+        remove: Transition {
+                ParallelAnimation {
+                    NumberAnimation { property: "opacity"; to: 0; duration: 1000 }
+                    NumberAnimation { properties: "x"; duration: 1000 }
+                }
+            }
+        removeDisplaced: Transition { NumberAnimation { properties: "x"; duration: 1000 } }
 
         model: dynamicListModel
         delegate: Item {
@@ -49,5 +56,16 @@ Rectangle {
         x: 89
         y: 11
         placeholderText: qsTr("Text Field")
+    }
+
+    Button {
+        id: button2
+        x: 317
+        y: 8
+        text: qsTr("Button")
+
+        onClicked: {
+            dynamicListModel.killLast();
+        }
     }
 }
