@@ -1,5 +1,6 @@
 import QtQuick 2.2
 import QtQuick.Window 2.1
+import QtQuick.Controls 1.2
 
 Rectangle {
     width: 400
@@ -23,5 +24,23 @@ Rectangle {
                 font.bold: true
             }
         }
+    }
+
+    Button {
+        id: button1
+        x: 8
+        y: 8
+        text: qsTr("Button")
+
+        onClicked: {
+            dynamicListModel.addStuff(textField1.text);
+        }
+    }
+
+    TextField {
+        id: textField1
+        x: 89
+        y: 11
+        placeholderText: qsTr("Text Field")
     }
 }
