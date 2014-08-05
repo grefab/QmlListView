@@ -1,21 +1,7 @@
 #include "dynamiclistitem.h"
 
-DynamicListItem::DynamicListItem() :
-    DynamicListItem("")
-{
-}
-
 DynamicListItem::DynamicListItem(const QString& name) :
     name_(name)
-{
-}
-
-DynamicListItem::DynamicListItem(const DynamicListItem& other)
-{
-    name_ = other.name_;
-}
-
-DynamicListItem::~DynamicListItem()
 {
 }
 

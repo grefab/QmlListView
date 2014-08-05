@@ -38,8 +38,6 @@ int DynamicListModel::rowCount(const QModelIndex& parent) const
 
 QVariant DynamicListModel::data(const QModelIndex& index, int role) const
 {
-    qDebug() << role;
-
     if( index.row() >= 0 && index.row() < stuff_.size() ) {
         switch( role ) {
             case NameRole:

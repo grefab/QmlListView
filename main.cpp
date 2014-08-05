@@ -7,8 +7,6 @@
 
 int main(int argc, char *argv[])
 {
-    qRegisterMetaType<DynamicListItem>("DynamicListItem");
-
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
