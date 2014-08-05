@@ -10,13 +10,6 @@ DynamicListModel::DynamicListModel(QObject* parent) :
     stuff_.append(DynamicListItem("baz"));
 }
 
-QHash<int, QByteArray> DynamicListModel::roleNames() const
-{
-    QHash<int, QByteArray> roles;
-    roles[NameRole] = "name";
-    return roles;
-}
-
 void DynamicListModel::enqueueStuff(QString stuff)
 {
     stuff_ << stuff;
@@ -27,6 +20,13 @@ void DynamicListModel::dequeueStuff()
     if( !stuff_.isEmpty() ) {
         stuff_.removeFirst();
     }
+}
+
+QHash<int, QByteArray> DynamicListModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[NameRole] = "name";
+    return roles;
 }
 
 int DynamicListModel::rowCount(const QModelIndex& parent) const

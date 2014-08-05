@@ -17,10 +17,13 @@ public:
 public:
     DynamicListModel(QObject* parent = 0);
 
-    QHash<int, QByteArray> roleNames() const;
-
+    /* Our methods. */
     void enqueueStuff(QString stuff);
     void dequeueStuff();
+
+public:
+    /* QAbstractListModel interface. */
+    QHash<int, QByteArray> roleNames() const;
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
