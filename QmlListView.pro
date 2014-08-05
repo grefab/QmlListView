@@ -4,8 +4,7 @@ QT += qml quick
 
 SOURCES += main.cpp \
     dynamiclistmodel.cpp \
-    shiftregisterelement.cpp \
-    shiftregisterlistmodel.cpp
+    mylistmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -17,5 +16,4 @@ include(deployment.pri)
 
 HEADERS += \
     dynamiclistmodel.h \
-    shiftregisterelement.h \
-    shiftregisterlistmodel.h
+    mylistmodel.h
