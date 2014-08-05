@@ -15,11 +15,19 @@ public:
     };
 
 public:
+    /* Standard constructor. */
     DynamicListModel(QObject* parent = 0);
 
+public:
     /* Our methods. */
-    void enqueueStuff(QString stuff);
-    void dequeueStuff();
+    void pushFront(QString stuff);
+    void pushBack(QString stuff);
+    void popFront();
+    void popBack();
+
+public slots:
+    /* Our interface. */
+    void addStuff(QString stuff);
 
 public:
     /* QAbstractListModel interface. */
@@ -30,6 +38,7 @@ public:
 
 private:
     QList<DynamicListItem> stuff_;
+
 };
 
 #endif // DYNAMICLISTMODEL_H

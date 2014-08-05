@@ -10,16 +10,41 @@ DynamicListModel::DynamicListModel(QObject* parent) :
     stuff_.append(DynamicListItem("baz"));
 }
 
-void DynamicListModel::enqueueStuff(QString stuff)
+void DynamicListModel::pushFront(QString stuff)
 {
-    stuff_ << stuff;
+    beginInsertRows(QModelIndex(), 0, 0);
+    stuff_.prepend(stuff);
+    endInsertRows();
 }
 
-void DynamicListModel::dequeueStuff()
+void DynamicListModel::pushBack(QString stuff)
+{
+    beginInsertRows(QModelIndex(), stuff_.size(), stuff_.size());
+    stuff_.append(stuff);
+    endInsertRows();
+}
+
+void DynamicListModel::popFront()
 {
     if( !stuff_.isEmpty() ) {
+        beginRemoveRows(QModelIndex(), 0, 0);
         stuff_.removeFirst();
+        endRemoveRows();
     }
+}
+
+void DynamicListModel::popBack()
+{
+    if( !stuff_.isEmpty() ) {
+        beginRemoveRows(QModelIndex(), stuff_.size() -1, stuff_.size() -1);
+        stuff_.removeLast();
+        endRemoveRows();
+    }
+}
+
+void DynamicListModel::addStuff(QString stuff)
+{
+    pushFront(stuff);
 }
 
 QHash<int, QByteArray> DynamicListModel::roleNames() const
