@@ -8,11 +8,18 @@ Rectangle {
 
     ListView {
         id: listView1
-        x: 145
-        y: 120
-        width: 110
-        height: 160
+
+        x: 8
+        y: 37
+        width: 384
+        height: 355
+
         clip: true
+        orientation: Qt.Horizontal
+
+        add: Transition { NumberAnimation { properties: "x"; from: -80; duration: 1000 } }
+        addDisplaced: Transition { NumberAnimation { properties: "x"; duration: 1000 } }
+
         model: dynamicListModel
         delegate: Item {
             x: 5
