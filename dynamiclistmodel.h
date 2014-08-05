@@ -60,9 +60,11 @@ public:
 
     QVariant data(const QModelIndex& index, int role) const
     {
-        return index.row() >= 0 && index.row() < items_.count()
-                ? itemAsVariant(index.row(), QString::fromUtf8(roleNames()[role]))
-                : QVariant();
+        if( index.row() >= 0 && index.row() < items_.count() ) {
+            return itemAsVariant(index.row(), QString::fromUtf8(roleNames()[role]));
+        }
+
+        return QVariant();
     }
 
 private:
@@ -89,7 +91,6 @@ private:
         popAction();
         endRemoveRows();
     }
-
 };
 
 #endif // DYNAMICLISTMODEL_H
