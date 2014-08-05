@@ -57,7 +57,7 @@ public:
 
         int userRoleIncrement = 0;
         for( const QString roleName : roleNames ) {
-            roles[++userRoleIncrement] = roleName.toUtf8();
+            roles[++userRoleIncrement + Qt::UserRole] = roleName.toUtf8();
         }
 
         return roles;
