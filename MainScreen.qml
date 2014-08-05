@@ -27,7 +27,7 @@ Rectangle {
             }
         removeDisplaced: Transition { NumberAnimation { properties: "x"; duration: 1000 } }
 
-        model: dynamicListModel
+        model: shiftRegisterListModel
         delegate: Item {
             x: 5
             width: 80
@@ -47,7 +47,7 @@ Rectangle {
         text: qsTr("Button")
 
         onClicked: {
-            dynamicListModel.addStuff(textField1.text);
+            shiftRegisterListModel.addStuff(textField1.text);
         }
     }
 
@@ -65,7 +65,7 @@ Rectangle {
         text: qsTr("Button")
 
         onClicked: {
-            dynamicListModel.killLast();
+            shiftRegisterListModel.killLast();
         }
     }
 }

@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 
 #include <QQmlContext>
-#include "dynamiclistmodel.h"
+#include "shiftregisterlistmodel.h"
 
 
 int main(int argc, char *argv[])
@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    MyListModel myListModel;
-    engine.rootContext()->setContextProperty("dynamicListModel", &myListModel);
+    ShiftRegisterListModel shiftRegisterListModel;
+    engine.rootContext()->setContextProperty("shiftRegisterListModel", &shiftRegisterListModel);
 
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 

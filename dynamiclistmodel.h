@@ -2,7 +2,6 @@
 #define DYNAMICLISTMODEL_H
 
 #include <QAbstractListModel>
-#include "dynamiclistitem.h"
 
 #include <functional>
 
@@ -75,19 +74,6 @@ private:
     /* Our data. */
     QList<T> items_;
     QMap<QString, std::function<QVariant(const T& item)>> accessorByRole_;
-
-};
-
-class MyListModel : public DynamicListModel<QString>
-{
-    Q_OBJECT
-
-public:
-    MyListModel(QObject* parent = 0);
-
-public slots:
-    void addStuff(QString stuff);
-    void killLast();
 
 };
 

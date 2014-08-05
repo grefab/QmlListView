@@ -36,26 +36,3 @@ QVariant DynamicListModelQt::data(const QModelIndex& index, int role) const
 
     return QVariant();
 }
-
-MyListModel::MyListModel(QObject* parent) :
-     DynamicListModel<QString>(parent)
-{
-    addRoleAccessor("name", [](const QString& item)
-    {
-        return item;
-    });
-
-    pushBack("foo");
-    pushBack("bar");
-    pushBack("baz");
-}
-
-void MyListModel::addStuff(QString stuff)
-{
-    pushFront(stuff);
-}
-
-void MyListModel::killLast()
-{
-    popBack();
-}
