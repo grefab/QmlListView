@@ -3,7 +3,6 @@ TEMPLATE = app
 QT += qml quick
 
 SOURCES += main.cpp \
-    dynamiclistmodel.cpp \
     mylistmodel.cpp
 
 RESOURCES += qml.qrc
